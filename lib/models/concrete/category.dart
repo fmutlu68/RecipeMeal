@@ -5,6 +5,7 @@ class Category implements IEntity {
   static final columnName = ["name", "TEXT"];
   static final columnParentId = ["parent_id", "INTEGER"];
   static final columnPath = ["path", "TEXT"];
+
   @override
   int id;
   int parentId;

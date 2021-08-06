@@ -18,9 +18,14 @@ class NavigationDrawer extends StatelessWidget {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         children: [
           ExpansionTile(
-            backgroundColor: Colors.blue,
-            collapsedBackgroundColor: Colors.blueGrey,
-            title: Text("Kategori İşlemleri"),
+            backgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+            collapsedBackgroundColor: Theme.of(context).colorScheme.onSecondary,
+            title: Text(
+              "Kategori İşlemleri",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
             children: [
               ListTile(
                 title: Text("Kategori Ekle"),

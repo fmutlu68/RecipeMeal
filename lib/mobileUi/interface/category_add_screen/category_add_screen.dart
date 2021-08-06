@@ -14,7 +14,7 @@ class _CategoryAddScreenState extends State<CategoryAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_to_photos_rounded, color: Colors.white),
+        child: Icon(Icons.add_to_photos_rounded),
         tooltip: "Kategori Ekle",
         onPressed: saveCategory,
       ),
@@ -40,19 +40,12 @@ class _CategoryAddScreenState extends State<CategoryAddScreen> {
     return TextField(
       controller: txtName,
       style: TextStyle(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primary,
         decorationColor: Colors.white,
       ),
       decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        labelStyle: TextStyle(color: Colors.white),
         hintText: "Kategori İsmi Giriniz.",
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        icon: Icon(Icons.info, color: Colors.white),
+        icon: Icon(Icons.info),
         labelText: "Bir Kategori İsmi Giriniz.",
       ),
     );
@@ -60,7 +53,6 @@ class _CategoryAddScreenState extends State<CategoryAddScreen> {
 
   saveCategory() async {
     String message;
-    var result;
     if (txtName.text.isEmpty || txtName.text == null) {
       message = "Kategori Adı Girilmedi.";
     } else {
@@ -72,11 +64,8 @@ class _CategoryAddScreenState extends State<CategoryAddScreen> {
       var snackBar = new SnackBar(
         content: Text(
           message,
-          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.black,
         action: SnackBarAction(
-          textColor: Colors.white,
           label: "Tamam",
           onPressed: () {
             Navigator.pop(context, true);

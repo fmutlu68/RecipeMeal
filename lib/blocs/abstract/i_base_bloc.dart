@@ -1,6 +1,5 @@
 import 'package:flutter_meal_app_update/core/utilities/results/i_result.dart';
 import 'package:flutter_meal_app_update/core/utilities/results/i_data_result.dart';
-import 'package:flutter_meal_app_update/models/abstract/i_entity.dart';
 
 abstract class IBaseBloc<T> {
   Future<IResult> add(T entity);

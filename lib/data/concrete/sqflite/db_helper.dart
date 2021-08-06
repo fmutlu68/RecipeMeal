@@ -79,6 +79,6 @@ class DbHelper {
 
   void createRecipeDb(Database db) {
     db.execute(
-        "Create Table recipes(${Recipe.columnId[0]} ${Recipe.columnId[1]} primary key, ${Recipe.columnRecipeName[0]} ${Recipe.columnRecipeName[1]}, ${Recipe.columnRecipeLink[0]} ${Recipe.columnRecipeLink[1]}, ${Recipe.columnLocalVideoFilePath[0]} ${Recipe.columnLocalVideoFilePath[1]}, ${Recipe.columnLocalAudioFilePath[0]} ${Recipe.columnLocalAudioFilePath[1]}, ${Recipe.columnIngredients[0]} ${Recipe.columnIngredients[1]}, ${Recipe.columnImage64[0]} ${Recipe.columnImage64[1]}, ${Recipe.columnCategoryId[0]} ${Recipe.columnCategoryId[1]})");
+        "Create Table recipes(${Recipe.columnId[0]} ${Recipe.columnId[1]} primary key, ${Recipe.columnRecipeName[0]} ${Recipe.columnRecipeName[1]}, ${Recipe.columnRecipeLink[0]} ${Recipe.columnRecipeLink[1]}, ${Recipe.columnLocalVideoFilePath[0]} ${Recipe.columnLocalVideoFilePath[1]}, ${Recipe.columnLocalAudioFilePath[0]} ${Recipe.columnLocalAudioFilePath[1]}, ${Recipe.columnIngredients[0]} ${Recipe.columnIngredients[1]}, ${Recipe.columnImage64[0]} ${Recipe.columnImage64[1]}, ${Recipe.columnCategoryId[0]} ${Recipe.columnCategoryId[1]}, ${Recipe.columnVideoQuality[0]} ${Recipe.columnVideoQuality[1]})");
   }
 }

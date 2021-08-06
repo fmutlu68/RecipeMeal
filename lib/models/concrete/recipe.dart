@@ -10,6 +10,7 @@ class Recipe implements IEntity {
   static final columnRecipeLink = ["recipe_link", "TEXT"];
   static final columnImage64 = ["image_64", "TEXT"];
   static final columnLocalVideoFilePath = ["local_video_file_path", "TEXT"];
+  static final columnVideoQuality = ["video_quality", "TEXT"];
   static final columnLocalAudioFilePath = ["local_audio_file_path", "TEXT"];
 
   @override
@@ -22,13 +23,13 @@ class Recipe implements IEntity {
   String image64;
   String localVideoFilePath;
   String localAudioFilePath;
+  String videoQuality;
 
   bool isVideoDownloaded;
   bool isAudioDownloaded;
 
   IconData selectedVideoDownloadedIcon;
   IconData selectedAudioDownloadedIcon;
-
   Recipe(
       {this.recipeName,
       this.recipeLink,
@@ -36,10 +37,12 @@ class Recipe implements IEntity {
       this.image64,
       this.localAudioFilePath,
       this.localVideoFilePath,
-      this.categoryId}) {
+      this.categoryId,
+      this.videoQuality}) {
     _checkVideoFile();
     _checkAudioFile();
   }
+  Recipe.empty();
   Recipe.withId(
       {this.id,
       this.recipeName,
@@ -48,7 +51,8 @@ class Recipe implements IEntity {
       this.image64,
       this.localAudioFilePath,
       this.localVideoFilePath,
-      this.categoryId}) {
+      this.categoryId,
+      this.videoQuality}) {
     _checkVideoFile();
     _checkAudioFile();
   }
@@ -72,13 +76,14 @@ class Recipe implements IEntity {
         object["local_audio_file_path"].runtimeType == String) {
       localAudioFilePath = object["local_audio_file_path"];
       isAudioDownloaded = true;
-      selectedAudioDownloadedIcon = Icons.download_done_rounded;
+      selectedAudioDownloadedIcon = Icons.music_video;
     }
     if (object["local_video_file_path"] != null &&
         object["local_video_file_path"].runtimeType == String) {
       localVideoFilePath = object["local_video_file_path"];
       isVideoDownloaded = true;
-      selectedAudioDownloadedIcon = Icons.download_done_rounded;
+      selectedVideoDownloadedIcon = Icons.live_tv;
+      videoQuality = object["video_quality"];
     }
     categoryId = object["category_id"];
   }
@@ -124,8 +129,14 @@ class Recipe implements IEntity {
     }
     if (localVideoFilePath.runtimeType == String) {
       map["local_video_file_path"] = localVideoFilePath;
+      map["video_quality"] = videoQuality;
     }
     map["category_id"] = categoryId;
     return map;
+  }
+
+  @override
+  String toString() {
+    return "$recipeName $ingredients $recipeLink";
   }
 }

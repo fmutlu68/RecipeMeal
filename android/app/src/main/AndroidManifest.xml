@@ -2,6 +2,7 @@
     package="com.example.flutter_meal_app_update">
    <application
         android:label="flutter_meal_app_update"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

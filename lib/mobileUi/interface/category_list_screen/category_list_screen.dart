@@ -1,11 +1,12 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_meal_app_update/blocs/concrete/sqflite/db_sqflite_category_bloc.dart';
 import 'package:flutter_meal_app_update/blocs/concrete/sqflite/db_sqflite_recipe_bloc.dart';
 import 'package:flutter_meal_app_update/core/utilities/results/i_data_result.dart';
 import 'package:flutter_meal_app_update/models/concrete/category.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:open_file/open_file.dart';
+import 'package:clipboard/clipboard.dart';
 
 class CategoryListScreen extends StatefulWidget {
   @override
@@ -77,9 +78,11 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               .where((video) => video.isAudioDownloaded == true)
               .length;
     }
-    setState(() {
-      dataResult = categoriesResult;
-    });
+    if (dataResult == null) {
+      setState(() {
+        dataResult = categoriesResult;
+      });
+    }
     return categoriesResult;
   }
 
@@ -88,31 +91,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
     return ListView.builder(
       itemCount: snapshot.data.data.length,
       itemBuilder: (context, index) {
-        return Slidable(
-          actionPane: SlidableScrollActionPane(),
-          secondaryActions: [
-            IconSlideAction(
-              color: Colors.red,
-              foregroundColor: Colors.black,
-              icon: Icons.delete,
-              caption: "Seçili Katgoriyi Sil",
-              onTap: () {
-                dbSqfliteCategoryBloc
-                    .delete(snapshot.data.data[index])
-                    .then((value) {
-                  ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                    duration: Duration(seconds: 5),
-                    content: Text(value.message),
-                  ));
-                });
-              },
-            ),
-          ],
-          child: Card(
+        return Card(
             color: Colors.deepPurple,
             child: buildCategoryTile(snapshot.data.data[index], context),
-          ),
-        );
+          );
       },
     );
   }
@@ -125,7 +107,6 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         ),
       ),
       title: Text(category.name),
-      subtitle: Text(category.path),
       children: [
         ListTile(
           tileColor: Colors.blueGrey,
@@ -143,13 +124,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               FlutterClipboard.controlC(category.path).then((value) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   new SnackBar(
-                    backgroundColor: Colors.black,
                     duration: Duration(seconds: 9),
-                    content: Text("Konum Kopyalandı.",
-                        style: TextStyle(color: Colors.white)),
+                    content: Text("Konum Kopyalandı."),
                     action: SnackBarAction(
                       label: "Klasörü Aç",
-                      textColor: Colors.white,
                       onPressed: () async {
                         await OpenFile.open(category.path);
                       },
